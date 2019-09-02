@@ -341,7 +341,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 
 # asteroom 2.6修改 事項
 1. 原本的api/DollTask/{project_id} 取回的資料結構中，新增一個int類型的欄位panoCount，目的是顯示目前有幾張全景圖。
-1. MobileActionEnum列舉新增BuyDollhouse = 17,//顯示購買dollhouse視窗
+2. MobileActionEnum列舉新增BuyDollhouse = 17,//顯示購買dollhouse視窗
+3. panoeditormobile.html 新增本版參數 ex: version=2019-09-02 (yyyy-mm-dd) 年月日就可以了
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
