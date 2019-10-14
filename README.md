@@ -221,8 +221,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     1. user.RoleType == RoleTypeEnum.BasicMember || user.RoleType == RoleTypeEnum.PaidMember
 1. 按下訂閱按鈕流程：
     1. 開啟WebView並連至``{api_server_base_url}/{culture}/MobilePricing?jwt_token={jwt_token}``
-    1. 若付費成功，偵測目前WebView的Url是否有 ``return-agreement`` 或 ``return-payment``或``stripe\return``，代表訂閱成功，當使用者關掉WebView之後使用GET api/User API取得使用者的新資料。
-    1. 若付費失敗或使用者自行取消，會回到 ``cancel-agreement``或``cancel-payment``或``stripe\cancel``，代表交易取消，使用者關掉WebView之後，不須重新撈取資料
+    1. 若付費成功，偵測目前WebView的Url是否有 ``return-agreement`` 或 ``return-payment``或``stripe/return``，代表訂閱成功，當使用者關掉WebView之後使用GET api/User API取得使用者的新資料。
+    1. 若付費失敗或使用者自行取消，會回到 ``cancel-agreement``或``cancel-payment``或``stripe/cancel``，代表交易取消，使用者關掉WebView之後，不須重新撈取資料
     
 ## 序號流程
 描述個人資訊頁面上的序號按鈕之行為。
