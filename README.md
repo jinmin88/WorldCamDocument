@@ -344,7 +344,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 2. MobileActionEnum列舉新增BuyDollhouse = 17,//顯示購買dollhouse視窗
 3. panoeditormobile.html 新增本版參數 ex: version=2019-09-02 (yyyy-mm-dd) 年月日就可以了
 
-# asteroom 2.7 修改事項
+# asteroom 2.8 修改事項
 1. Pricing方案修改
     * 未來版本分成下列幾種版本：
         * 專業版：每月收取$19.9USD，一次購買一年$199USD，有5個Active Project和10GB storage。
