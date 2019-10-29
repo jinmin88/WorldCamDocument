@@ -351,7 +351,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     {
         UnConfirm = 0,  //帳號還未確認信箱
         Active = 1,     //帳號已經啟用信箱
-        Suspend = 2,    //帳號已被管理員Suspend
+        Suspend = 2,    //帳號已被停用
         Expired = 3     //帳號已經過期
     }
     ```
@@ -364,6 +364,39 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         GooglePlus = 3      //使用Google+登入
     }
     ```
+- ## <a name="DeliveryStatus"></a>DeliveryStatus (訂單運送狀態)
+    ```csharp
+    public enum DeliveryStatus
+    {
+        Unfulfilled = 0,    //尚未出貨
+        Shipped = 1,        //已經寄出
+    }
+    ```
+- ## <a name="DiscountType"></a>DiscountType (折扣類型)
+    ```csharp
+    public enum DiscountType
+    {
+        FixedAmount = 0,    //定額折扣  10 => Product.Price - 10
+        Percentage = 1      //百分比折扣  80% => Product.Price * 80%
+    }
+    ```
+- ## <a name="DisplayUnit"></a>DisplayUnit (顯示量尺單位)
+    ```csharp
+    public enum DisplayUnit
+    {
+        Meter = 0,  //公尺
+        Foot = 1    //英尺
+    }
+    ```
+- ## <a name="DollFaceType"></a>DollFaceType (Dollhouse中，房間內每面牆壁的種類)
+    ```csharp
+    public enum DollFaceType
+    {
+        Floor = 0,  //底板
+        Ceil = 1,   //天花板
+        Wall = 2    //牆壁
+    }
+    ```    
 - ## <a name="ErrorCodes"></a>ErrorCodes (錯誤代碼)
     ```csharp
     public enum ErrorCodes
@@ -385,6 +418,47 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         UnknownError = 9999                 //未知的錯誤
     }
     ```
+- ## <a name="FCMMessageType"></a>FCMMessageType (FCM通知類型)
+    ```csharp
+    public enum FCMMessageType
+    {
+        TransferProjectSuccess = 1, //轉移專案成功
+        NewIncomingLeadgen = 2,     //有新的Leadgen訊息進來
+        DollTaskCreated = 3,        //Dollhouse Task已經建立 (有人下Dollhouse訂單)
+        DollTaskCompleted = 4       //Dollhouse Task已經完成
+    }
+    ```
+- ## <a name="MailType"></a>MailType (信件類型)
+    ```csharp
+    public enum MailType
+    {
+        ACTIVATION = 0,             //帳號啟用信
+        RESET_PWD = 1,              //密碼重設信
+        WELCOME = 2,                //歡迎信
+        TENDAY_NOTIFICATION = 3,    //十天通知信
+        THREEDAY_NOTIFICATION = 4,  //三天通知信
+        REPORT = 5,                 //檢舉信
+        ORDER_CONFIRMATION = 6,     //訂單確認信
+        UPGRADE_TO_PRO = 7,         //升級成專業版通知信
+        LEARN_HOWTO = 8,            //Learn Howto
+        WELL_DONE_SHOOTING = 9,     //Well donw shooting first panorama
+        CHECK_OUT_OTHER = 10,       //Check out other saying about asteroom
+        HAVE_TROUBLE_STITCHING = 11,//Have trouble stitching
+        WELL_DONE_STITCHING = 12,   //Well done stitching
+        GETTING_STUCK = 13,         //Getting stuck
+        YOU_HAD_A_VISITOR = 14,     //You had a visitor
+        WAY_TO_GET_MORE = 15,       //Way to get more
+        TRIAL_21_CREATE_TOUR_IN_MINUTES = 21,
+        TRIAL_22_3TIPS_TO_STANDOUT = 22,
+        TRIAL_31_STANDOUT_WITH_VR = 23,
+        TRIAL_41_STANDOUT_IN_DIGITAL_MARKETING = 24,
+        TRIAL_42_FLOOR_PLAN = 25,
+        TRIAL_51_INACTIVE_USER = 26,
+        TRIAL_62_D10_NOTICE = 27,
+        TRIAL_72_D3_NOTICE = 28,
+        SYSTEM_EMAIL = 99
+    }
+    ```
 - ## <a name="NoticeTypeEnum"></a>NoticeTypeEnum (通知類型)
     ```csharp
     public enum NoticeTypeEnum
@@ -392,7 +466,10 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         ProjectComment,     //專案的評論
         ObjectComment,      //物件評論
         StorageFullAlert,   //背包快滿的通知
-        ExpiredAlert        //逾期通知
+        ExpiredAlert,       //逾期通知
+        NewTrasferProject,  //有新的轉移專案
+        DollTaskCreated,    //有新的Dollhouse task
+        DollTaskCompleted   //Dollhouse task剛完成通知
     }
     ```
 - ## <a name="OrderStatus"></a>OrderStatus (訂單狀態)
@@ -403,25 +480,27 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         Processing = 20,    //處理中
         Completed = 30,     //已完成
         Cancelled = 40,     //已取消
-        Returned = 50       //已退貨
+        Returned = 50,      //已退貨
+        PartialReturned = 51//部分退貨
     }
     ```
 - ## <a name="PeriodType"></a>PeriodType (定期類型)
     ```csharp
     public enum PeriodType
     {
-        Daily = 0,      //每日
-        Monthly = 1,    //每月
-        Yearly = 2      //每年
+        Daily = 0,    //每日
+        Monthly = 1,  //每月
+        Weekly = 2,   //每週
+        Yearly = 3    //每年
     }
     ```
 - ## <a name="PPUserOrderBy"></a>PPUserOrderBy (使用者排序方式)
     ```csharp
-    public enum PPUserOrderBy
+    public enum UserOrderBy
     {
         UserAccount = 0,    //根據帳號
-        CreateTime = 1,     //根據建立時間
-        LastLoginTime = 2   //根據上次登入時間
+        LastLoginTime = 1,  //根據上次登入時間
+        CreateTime = 2      //根據帳號建立時間
     }
     ```
 - ## <a name="ProductAttribute"></a>ProductAttribute (商品屬性)
@@ -429,8 +508,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     public enum ProductAttribute
     {
         Buyout = 0,     //買斷式商品
-        Period = 1,     //期間式商品
-        Times = 2       //次數性商品
+        Period = 1      //期間式商品
     }
     ```
 - ## <a name="ProductType"></a>ProductType (商品類型)
@@ -464,8 +542,11 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     public enum RoleTypeEnum
     {
         BasicMember = 0,        //一般測試用戶
-        PaidMember = 1,         //付費用戶
+        PaidMember = 1,         //專業版用戶
         EnterpriseMember = 2,   //企業用戶
+        Child = 6,              //子帳號
+        Custom = 7,             //客製版用戶
+        Operator = 8,           //操作員
         Admin = 9               //管理員
     }
     ```
