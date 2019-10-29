@@ -351,11 +351,11 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         * 企業版(25)：每月收取$59USD，一次購買一年$590USD，有25個Active Project和100GB storage，並且最多可建立10個子帳號(含自己)。
         * 企業版(50)：每月收取$99USD，一次購買一年$990USD，有50個Active Project和100GB storage，並且最多可建立25個子帳號(含自己)。
         * 企業版(100)：每月收取$99USD，一次購買一年$990USD，有100個Active Project和100GB storage，並且最多可建立50個子帳號(含自己)。
-    * 收費頁面原本可以選1~12個月，現在改成可選1~6個月
+    * 收費頁面原本可以選1至12個月，現在改成可選1至6個月
     * 收費頁面的Return URL改為返回第一次進入Payment頁面的Referer URL。
 2. 企業版子帳號修改
     * RoleTypeEnum新增一個列舉Child=6，代表這個User的角色是子帳號。
-        * 請各個Client端使用新的RoleTypeEnum顯示版本資訊顯示的版本字串
+        * <span style="color:red">請各個Client端使用新的RoleTypeEnum顯示版本資訊顯示的版本字串</span>
     * AppUser資料表新增一個ParentId的欄位，指的是父親帳號的UserId。
     * 廢除原本的Agent Management，改用子帳號維護的方式運作。
     * 新增/api/ChildAccount等CRUD API，提供Web端實作子帳號的CRUD。
@@ -367,7 +367,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         * int ProjCount：目前此帳號所有的專案數量
         * int OpenProjCount：目前此帳號所有專案Status=Open的數量
         * int IsNeedResetPassword：是否需要重設密碼
-            * 請各Client當登入之後發現JUser.IsNeedResetPassword為True的狀態下，請強制跳出更換密碼的UI，當用戶重設完密碼之後，此Flag會自動變成false，下次就不需要強制更換密碼了。
+            * <span style="color:red">請各Client當登入之後發現JUser.IsNeedResetPassword為True的狀態下，請強制跳出更換密碼的UI，當用戶重設完密碼之後，此Flag會自動變成false，下次就不需要強制更換密碼了。</span>
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
