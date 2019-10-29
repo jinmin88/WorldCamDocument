@@ -344,6 +344,31 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 2. MobileActionEnum列舉新增BuyDollhouse = 17,//顯示購買dollhouse視窗
 3. panoeditormobile.html 新增本版參數 ex: version=2019-09-02 (yyyy-mm-dd) 年月日就可以了
 
+# asteroom 2.7 修改事項
+1. Pricing方案修改
+    * 未來版本分成下列幾種版本：
+        * 專業版：每月收取$19.9USD，一次購買一年$199USD，有5個Active Project和10GB storage。
+        * 企業版(25)：每月收取$59USD，一次購買一年$590USD，有25個Active Project和100GB storage，並且最多可建立10個子帳號(含自己)。
+        * 企業版(50)：每月收取$99USD，一次購買一年$990USD，有50個Active Project和100GB storage，並且最多可建立25個子帳號(含自己)。
+        * 企業版(100)：每月收取$99USD，一次購買一年$990USD，有100個Active Project和100GB storage，並且最多可建立50個子帳號(含自己)。
+    * 收費頁面原本可以選1~12個月，現在改成可選1~6個月
+    * 收費頁面的Return URL改為返回第一次進入Payment頁面的Referer URL。
+2. 企業版子帳號修改
+    * RoleTypeEnum新增一個列舉Child=6，代表這個User的角色是子帳號。
+        * 請各個Client端使用新的RoleTypeEnum顯示版本資訊顯示的版本字串
+    * AppUser資料表新增一個ParentId的欄位，指的是父親帳號的UserId。
+    * 廢除原本的Agent Management，改用子帳號維護的方式運作。
+    * 新增/api/ChildAccount等CRUD API，提供Web端實作子帳號的CRUD。
+    * JUser對應子帳號增加以下欄位
+        * int ChildAccount：假設是企業版帳號，此欄位代表可以建立多少子帳號。
+        * int ActiveCount：代表這個帳號可以開啟多少個專案的分享狀態。
+        * int IsActiveShareable：代表這個帳號是否與母帳號分享ActiveCount個數(假設子帳號開1個，母帳號開2個，則母帳號與子帳號可視為已經開啟3個)
+        * int EntActiveCount：代表企業版帳號最多可以Active的Project Count。
+        * int ProjCount：目前此帳號所有的專案數量
+        * int OpenProjCount：目前此帳號所有專案Status=Open的數量
+        * int IsNeedResetPassword：是否需要重設密碼
+            * 請各Client當登入之後發現JUser.IsNeedResetPassword為True的狀態下，請強制跳出更換密碼的UI，當用戶重設完密碼之後，此Flag會自動變成false，下次就不需要強制更換密碼了。
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
@@ -541,13 +566,13 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     ```csharp
     public enum RoleTypeEnum
     {
-        BasicMember = 0,        //一般測試用戶
-        PaidMember = 1,         //專業版用戶
-        EnterpriseMember = 2,   //企業用戶
-        Child = 6,              //子帳號
-        Custom = 7,             //客製版用戶
-        Operator = 8,           //操作員
-        Admin = 9               //管理員
+        BasicMember = 0,        //試用版 (Trial User)
+        PaidMember = 1,         //專業版 (Professional User
+        EnterpriseMember = 2,   //企業版 (Enterprise User)
+        Child = 6,              //子帳號 (Enterprise-Child User)
+        Custom = 7,             //客製版用戶 (Custom User)
+        Operator = 8,           //操作員 (Operator)
+        Admin = 9               //管理員 (Administrator)
     }
     ```
 - ## <a name="SetupActionEnum"></a>SetupActionEnum (場景內標示物件種類)
