@@ -356,6 +356,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 2. 企業版子帳號修改
     * RoleTypeEnum新增一個列舉Child=6，代表這個User的角色是子帳號。
         * **請各個Client端使用新的RoleTypeEnum顯示版本資訊顯示的版本字串**
+        * **當RoleType=6時不要顯示購買按鈕**
     * AppUser資料表新增一個ParentId的欄位，指的是父親帳號的UserId。
     * 廢除原本的Agent Management，改用子帳號維護的方式運作。
     * 新增/api/ChildAccount等CRUD API，提供Web端實作子帳號的CRUD。
