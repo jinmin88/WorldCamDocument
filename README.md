@@ -373,7 +373,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
    * **原本新增專案時，選擇Agent時使用JProjectPost.IsShowUserProfile來代表此Project是否要顯示經紀人資訊。**
    * **原本修改專案時，選擇Agent時使用JProjectPut.IsShowUserProfile代表修改是否要顯示經紀人資訊。**
 4. **各個Client的Version增加顯示Maximum number of active tours (當roleType=6時，判斷IsActiveShareable==true時使用user.Parent.ActiveCount，否的話用user.ActiveCount，當RoleType為其他時採用user.ActiveCount)，並放在第一列**
-5. **各個Client的Version顯示的容量，當帳號角色為6(企業版子帳號)時，採用user.Parent.UsedPackageSize取代原本的user.UsedPackageSize**
+5. **各個Client的Version顯示的容量，當帳號角色為6(企業版子帳號)時，採用user.Parent.UsedSize取代原本的user.UsedSize**
 6. **當專案為空專案時，就算用戶有上傳自己專案的封面圖，我們也不顯示出來**
 
 
