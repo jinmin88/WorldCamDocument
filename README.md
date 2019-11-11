@@ -375,7 +375,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 4. **各個Client的Version增加顯示Maximum number of active tours (當roleType=6時，判斷IsActiveShareable==true時使用user.Parent.ActiveCount，否的話用user.ActiveCount，當RoleType為其他時採用user.ActiveCount)，並放在第一列**
 5. **各個Client的Version顯示的容量，當帳號角色為6(企業版子帳號)時，採用user.Parent.UsedSize取代原本的user.UsedSize**
 6. **當專案為空專案時，就算用戶有上傳自己專案的封面圖，我們也不顯示出來**
-
+7. 所有需要Authrize的API，需判斷回傳的JResponse.ErrorCodes執行以下流程(原本的ErrorCodes 10改成UserSuspend)：
+    * 當response.error_code == ErrorCodes.UserNotExist(9) 或 ErrorCodes.UserSuspend(10)，顯示訊息之後幫用戶登出並回到登入畫面。
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
@@ -444,7 +445,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         AccountUnConfirm = 7,               //帳號尚未認證
         ProjectNotExist = 8,                //專案不存在
         UserNotExist = 9,                   //帳號不存在
-        UserExpired = 10,                   //帳號逾期
+        UserSuspend = 10,                   //帳號逾期
         SyncNextround = 11,                 //代表資料與Client端預期的已經不同，請再同步一次
         LocalServerTimeExceed = 12,         //Local端與Server端時間超過15分鐘
         PaypalAgreementCancelWhenPending = 101, //Paypal定期定額訂單取消已通知但是目前為Pending        
