@@ -369,6 +369,11 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         * int OpenProjCount：目前此帳號所有專案Status=Open的數量
         * int IsNeedResetPassword：是否需要重設密碼
             * **請各Client當登入之後發現JUser.IsNeedResetPassword為True的狀態下，請強制跳出更換密碼的UI，當用戶重設完密碼之後，此Flag會自動變成false，下次就不需要強制更換密碼了。**
+    * 已分享的專案數 / 可分享的專案數 顯示邏輯如下
+        * 當為企業版時：顯示 uesr.OpenProjCount / user.ActiveCount
+        * 當為Child版本且IsActiveShareable==true時：顯示 user.Parent.OpenProjCount / user.Parent.ActiveCount
+        * 當為Child版本且IsActiveShareable==false時：顯示 user.OpenProjCount / user.ActiveCount
+        * 當為其他角色時：顯示 user.OpenProjCount / user.ActiveCount
 3. **廢除Agent Management，JProject新增一個Bool IsShowUserProfile取代**
    * **原本新增專案時，選擇Agent時使用JProjectPost.IsShowUserProfile來代表此Project是否要顯示經紀人資訊。**
    * **原本修改專案時，選擇Agent時使用JProjectPut.IsShowUserProfile代表修改是否要顯示經紀人資訊。**
