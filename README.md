@@ -382,6 +382,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 6. **當專案為空專案時，就算用戶有上傳自己專案的封面圖，我們也不顯示出來**
 7. 所有需要Authrize的API，需判斷回傳的JResponse.ErrorCodes執行以下流程(原本的ErrorCodes 10改成UserSuspend)：
     * 當response.error_code == ErrorCodes.UserNotExist(9) 或 ErrorCodes.UserSuspend(10)，顯示訊息之後幫用戶登出並回到登入畫面。
+8. 所有client在專案列表進入leangen頁面之後，若呼叫ga api得到 response.error_code == ErrorCodes.ProjectNotExist(8)時，請關閉目前ga畫面並回到專案列表中(需要重整專案列表)
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
