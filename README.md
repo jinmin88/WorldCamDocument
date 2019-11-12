@@ -380,7 +380,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 4. **各個Client的Version增加顯示Maximum number of active tours (當roleType=6時，判斷IsActiveShareable==true時使用user.Parent.ActiveCount，否的話用user.ActiveCount，當RoleType為其他時採用user.ActiveCount)，並放在第一列**
 5. **各個Client的Version顯示的容量，當帳號角色為6(企業版子帳號)時，採用user.Parent.UsedSize取代原本的user.UsedSize**
 6. **當專案為空專案時，就算用戶有上傳自己專案的封面圖，我們也不顯示出來**
-7. 所有需要Authrize的API，需判斷回傳的JResponse.ErrorCodes執行以下流程(原本的ErrorCodes 10改成UserSuspend)：
+7. 所有需要Authrize的API以及refresh token時，需判斷回傳的JResponse.ErrorCodes執行以下流程(原本的ErrorCodes 10改成UserSuspend)：
     * 當response.error_code == ErrorCodes.UserNotExist(9) 或 ErrorCodes.UserSuspend(10)，顯示訊息之後幫用戶登出並回到登入畫面。
 8. 所有client在專案列表進入leangen頁面之後，若呼叫ga api得到 response.error_code == ErrorCodes.ProjectNotExist(8)時，請關閉目前ga畫面並回到專案列表中(需要重整專案列表)
 
