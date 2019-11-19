@@ -384,7 +384,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     * 當response.error_code == ErrorCodes.UserNotExist(9) 或 ErrorCodes.UserSuspend(10)，顯示訊息之後幫用戶登出並回到登入畫面。
 8. 所有client在專案列表進入leangen頁面之後，若呼叫ga api得到 response.error_code == ErrorCodes.ProjectNotExist(8)時，請關閉目前ga畫面並回到專案列表中(需要重整專案列表)
 9. 修改個人資訊的版本，當user.IsActiveShareable==false時，顯示**已分享的專案數/可分享的專案數**，對應到user.OpenProjCount/user.ActiveCount。
-10.當user.IsActiveShareable==true時，顯示**已啟用專案數/剩餘可分配專案數**，對應到user.OpenProjCount/user.AvaiableProjCount。
+10. 當user.IsActiveShareable==true時，顯示**已啟用專案數/配額專案數(剩餘可分享專案數)**，對應到user.OpenProjCount/user.AvaiableProjCount。
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
