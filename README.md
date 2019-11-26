@@ -386,6 +386,18 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 9. 修改個人資訊的版本，顯示**已啟用專案數/配額專案數(剩餘可分享專案數)**，對應到user.OpenProjCount/user.ActiveCount(user.AvaiableProjCount)。
 10. 當用戶所使用的企業版為50人以上(含50)，取消顯示Powerer by asteroom。
 
+# asteroom 2.9 修改事項
+1. 新增免費送Dollhouse功能，異動如下：
+    * JUser新增一個欄位，叫做FreeDollhouseCount，紀錄還有多少免費製作Dollhouse的次數。
+    * 原本按下購買Dollhouse的API([GET]/api/DollTask/{project_id})取回資料的時候，JDollTaskData多一個欄位bool IsFree，代表此次購買是否可以免費。
+    * 當IsFree為false的時候走舊有的流程：下訂單後付款完才產生Dollhouse任務單。
+    * 當IsFree為true時，原本購買的按鈕改成顯示免費按鈕，按下之後呼叫以下api
+    * [HttpPost]/api/DollTask，Body傳入購買的project_id，假設成功之後，請顯示成功訊息後，重整專案狀態，並回到列表。
+    * 測試方法：
+        * 可以到測試後台=>行銷管理=>GiftCard管理=>選"一個月GiftCard"的活動=>複製一組可用的序號後，登入試用帳號後輸入此序號，即可以升級成專業版並得到一個免費製作Dollhouse的機會
+        * 可以請Jeff幫你的帳號增加FreeDollhouseCount值
+
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
