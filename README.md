@@ -391,7 +391,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     * JUser新增一個欄位，叫做FreeDollhouseCount，紀錄還有多少免費製作Dollhouse的次數。
     * 原本按下購買Dollhouse的API([GET]/api/DollTask/{project_id})取回資料的時候，JDollTaskData多一個欄位bool IsFree，代表此次購買是否可以免費。
     * 當IsFree為false的時候走舊有的流程：下訂單後付款完才產生Dollhouse任務單。
-    * 當IsFree為true時，原本購買的按鈕改成顯示免費按鈕，按下之後呼叫以下api
+    * 當IsFree為true時，Pricing顯示$0，原本購買的按鈕改成顯示"免費"，按下之後呼叫以下的api：
     * [HttpPost]/api/DollTask，Body傳入購買的project_id，假設成功之後，請顯示成功訊息後，重整專案狀態，並回到列表。
     * 測試方法：
         * 可以到測試後台=>行銷管理=>GiftCard管理=>選"一個月GiftCard"的活動=>複製一組可用的序號後，登入試用帳號後輸入此序號，即可以升級成專業版並得到一個免費製作Dollhouse的機會
