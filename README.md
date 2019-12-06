@@ -396,6 +396,19 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     * 測試方法：
         * 可以到測試後台=>行銷管理=>GiftCard管理=>選"一個月GiftCard"的活動=>複製一組可用的序號後，登入試用帳號後輸入此序號，即可以升級成專業版並得到一個免費製作Dollhouse的機會
         * 可以請Jeff幫你的帳號增加FreeDollhouseCount值
+2. 新增影像處理流程，須連Dollhouse流程一併修改
+    * 購買按鈕顯示與否邏輯
+    ```csharp
+    bool IsFree = user.FreeDollhouseCount > 0 ? true : false;
+    bool IsShowDollhouseItem = project.DollFloors.Count > 0 ? false : (project.DollTasks.Count(a=>a.Status == TaskStatus.Accepted || a.Status == Task.FeedBack || a.Status == Task.Completed) > 0 ? false : true);
+    bool IsShowImageProcessingItem = project.HasImageProcessing == true ? false  : (project.ImageTasks.Count(a=>a.Status == TaskStatus.Accepted) > 0 ? false : true);
+    if (IsShowDollhouseItem || IsShowImageProcessingItem) {
+        //Display the buy button
+    }
+    ```
+    * 購買UI呈現
+    * 
+    
 
 
 # 列舉型態
