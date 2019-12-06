@@ -406,9 +406,22 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         //Display the buy button
     }
     ```
-    * 購買UI呈現
-    * 
-    
+    * 顯示第一個畫面
+        * 如果IsShowDollhouseItem == true，則呼叫 [GET]/api/DollTask/{project_id}取得商品價格以及任務所需的處理時間等資訊後，加入到List中。
+        * 如果IsShowImageProcessingItem == true，則呼叫[GET]/api/ImageTask/{project_id}取得商品價格以及任務所需的處理時間等資訊後，加入到List中。
+    * 顯示第二個畫面
+        * 假設IsFree為True
+            * 當IsShowDollhouseItem==true且IsShowImageProcessingItem==true時，勾選行為為一起勾選或一起取消勾選，按鈕字樣為免費，按下之後呼叫購買免費Dollhouse API。
+            * 當IsShowDollhouseItem==true且IsShowImageProcessingItem==false時，按鈕字樣為免費，按下之後呼叫購買免費Dollhouse API。
+            * 當IsShowDollhouseItem==false且IsShowImageProcessingItem==true時，按鈕字樣為購買，按下之後呼叫購買影像處理項目API。
+        * 假設IsFree為False
+            * 勾選行為不作連動，勾甚麼則呼叫對應的購買API。
+    * 購買API介紹
+        * 免費Dollhouse API：[POST]/api/DollTask with JSON body {"project_id" : "{project_id}" }
+        * 只購買Dollhouse API：[POST]/api/Order with JSON body {"pricing_item_id":"P_DOLLHOUSE","project_id" : "{project_id}"}
+        * 只購買ImageProcessing API：[POST]/api/Order with JSON body {"pricing_item_id": "P_IMAGEPROCESSING", "project_id": "{project_id}" }
+        * 兩者一起購買：[POST]/api/Order with JSON body {"pricing_item_id": "P_DOLLHOUSE_AND_IMAGEPROCESSING", "project_id": "{project_id}" }
+        * 呼叫完之後redirect url到api給定的訂單網頁即可
 
 
 # 列舉型態
