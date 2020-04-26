@@ -433,6 +433,11 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 7. 當RoleType=7(客製版)，個人資訊新增一項Billing Info，使用[GET] api/Invoice 取得客製版帳號已經開完的所有Invoice。
 8. 當您開啟專案/購買Dollhouse/購買影像處理訂單時，都會自動建立一筆InvoiceItem到資料庫中，這些InvoiceItem會在下個月一號，進行開立Invoice的動作，所以為了測試第七點，不可能等到下個月才看結果，所以這邊提供一個api可以把帳號目前尚未開立的InvoiceItem一起開立一張Invoice。此api請呼叫[GET] api/Stripe/create?userAcccount={your_account}，呼叫完會馬上開立Invoice，這時第7部的api才能取到資料。
 
+# asteroom 3.0 新增顯示email修改事項
+1. JUser新增一個DisplayEmail欄位，顯示用戶要秀給client的聯絡用email
+2. [PUT]api/User/{user_id} 新增displayEmail欄位，可以提供修改
+3. 請在分享專案時，顯示此displayEmail
+
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
