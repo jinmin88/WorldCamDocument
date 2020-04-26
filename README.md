@@ -423,6 +423,16 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         * 兩者一起購買：[POST]/api/Order with JSON body {"pricing_item_id": "P_DOLLHOUSE_AND_IMAGEPROCESSING", "project_id": "{project_id}" }
         * 呼叫完之後redirect url到api給定的訂單網頁即可
 
+# asteroom 3.0 客製版修改事項
+1. RoleType新增腳色7(Custom)，為客製版腳色，與企業版相同，可以建立子帳號，但是差異在於客製版和其子帳號的收費方式(專案分享/Dollhouse/影像處理)，為每個月1號收上個月所使用的量來收費。
+2. 可於測試後台的帳號明細頁，將您的帳號升級為客製版帳號。升級之後，會將所有的專案關閉，重新計算價錢。
+3. 版本資訊頁，若角色為7(Custom)，顯示"客製版"，若為6(Child，Parent的角色為7)，則顯示"客製版"字串。
+4. 與企業版相同，需要顯示子帳戶管理功能，與企業版的管理功能一模一樣。
+5. 顯示Dollhouse以及PanoRetouch時，使用[GET]api/DollTask/{project_id}以及[GET]api/ImageTask/{project_id}取得Dollhouse以及PanoRetouch的IsFree/Price/ProcessDays/PanoCount四個值，當IsFree=false時，跟以前一樣呼叫[POST]api/Order新增Dollhouse以及訂單。若IsFree為false的話，執行第6步的步驟。
+6. 當IsFree=true時，有買Dollhouse呼叫[POST]api/DollTask/v3 新增Dollhose任務單，有買PanoRetouch則呼叫[POST]api/ImageTask/v3來新增影像處理訂單。
+7. 當RoleType=7(客製版)，個人資訊新增一項Billing Info，使用[GET] api/Invoice 取得客製版帳號已經開完的所有Invoice。
+8. 當您開啟專案/購買Dollhouse/購買影像處理訂單時，都會自動建立一筆InvoiceItem到資料庫中，這些InvoiceItem會在下個月一號，進行開立Invoice的動作，所以為了測試第七點，不可能等到下個月才看結果，所以這邊提供一個api可以把帳號目前尚未開立的InvoiceItem一起開立一張Invoice。此api請呼叫[GET] api/Stripe/create?userAcccount={your_account}，呼叫完會馬上開立Invoice，這時第7部的api才能取到資料。
+
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
@@ -442,6 +452,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         Custom = 0,         //一般使用帳號密碼登入
         Facebook = 2,       //使用Facebook登入
         GooglePlus = 3      //使用Google+登入
+        Apple = 4,          //使用Apple登入
     }
     ```
 - ## <a name="DeliveryStatus"></a>DeliveryStatus (訂單運送狀態)
@@ -506,13 +517,15 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         NewIncomingLeadgen = 2,     //有新的Leadgen訊息進來
         DollTaskCreated = 3,        //Dollhouse Task已經建立 (有人下Dollhouse訂單)
         DollTaskCompleted = 4       //Dollhouse Task已經完成
+        ImageTaskCreated = 5,
+        ImageTaskClosed = 6
     }
     ```
 - ## <a name="MailType"></a>MailType (信件類型)
     ```csharp
     public enum MailType
     {
-        ACTIVATION = 0,             //帳號啟用信
+ACTIVATION = 0,             //帳號啟用信
         RESET_PWD = 1,              //密碼重設信
         WELCOME = 2,                //歡迎信
         TENDAY_NOTIFICATION = 3,    //十天通知信
@@ -528,6 +541,9 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         GETTING_STUCK = 13,         //Getting stuck
         YOU_HAD_A_VISITOR = 14,     //You had a visitor
         WAY_TO_GET_MORE = 15,       //Way to get more
+        DOLLHOUSE_COMPLETE = 16,    //Dollhosue is complete
+        ORDER_IN_PROCESS = 17,      //Dolltask or imagetask start to process
+        PANORETOUCH_COMPLETE = 18,  //PanoRetouch order is complete
         TRIAL_21_CREATE_TOUR_IN_MINUTES = 21,
         TRIAL_22_3TIPS_TO_STANDOUT = 22,
         TRIAL_31_STANDOUT_WITH_VR = 23,
@@ -536,6 +552,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         TRIAL_51_INACTIVE_USER = 26,
         TRIAL_62_D10_NOTICE = 27,
         TRIAL_72_D3_NOTICE = 28,
+        ACTIVATION_RDC_INSTA360 = 31,
+        WELCOME_RDC_INSTA360 = 32,
         SYSTEM_EMAIL = 99
     }
     ```
@@ -549,7 +567,9 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
         ExpiredAlert,       //逾期通知
         NewTrasferProject,  //有新的轉移專案
         DollTaskCreated,    //有新的Dollhouse task
-        DollTaskCompleted   //Dollhouse task剛完成通知
+        DollTaskCompleted,  //Dollhouse task剛完成通知
+        ImageProcessingCreated, //有新的影像處理task
+        ImageProcessingClosed   //影像處理task結案
     }
     ```
 - ## <a name="OrderStatus"></a>OrderStatus (訂單狀態)
