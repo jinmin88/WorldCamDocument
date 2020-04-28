@@ -433,7 +433,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 ```json
 {
   "projectId": "xxxxxxxxxxxxxxxxxxxx",
-  "pricing_item_id" : "P_DOLLHOUSE_AND_IMAGEPROCESSING"   //P_DOLLHOUSE_AND_IMAGEPROCESSING：兩者都買,P_DOLLHOUSE：只買DOLLHOUSE,P_IMAGEPROCESSING:只買影像處理
+  "pricing_item_id" : "P_DOLLHOUSE_AND_IMAGEPROCESSING"   //P_DOLLHOUSE_AND_IMAGEPROCESSING:兩者都買, P_DOLLHOUSE:只買DOLLHOUSE, P_IMAGEPROCESSING:只買影像處理
 }
 ```
 7. 當RoleType=7(客製版)，個人資訊新增一項Billing Info，使用[GET] api/Invoice 取得客製版帳號已經開完的所有Invoice。
