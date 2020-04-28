@@ -428,7 +428,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 2. 可於測試後台的帳號明細頁，將您的帳號升級為客製版帳號。升級之後，會將所有的專案關閉，重新計算價錢。
 3. 版本資訊頁，若角色為7(Custom)，顯示"客製版"，若為6(Child，Parent的角色為7)，則顯示"客製版"字串。
 4. 與企業版相同，需要顯示子帳戶管理功能，與企業版的管理功能一模一樣。
-5. 顯示Dollhouse以及PanoRetouch時，使用[GET]api/DollTask/{project_id}以及[GET]api/ImageTask/{project_id}取得Dollhouse以及PanoRetouch的IsFree/Price/ProcessDays/PanoCount四個值，當IsFree=false時，跟以前一樣呼叫[POST]api/Order新增Dollhouse以及訂單。若IsFree為false的話，執行第6步的步驟。
+5. 顯示Dollhouse以及PanoRetouch時，使用[GET]api/DollTask/{project_id}以及[GET]api/ImageTask/{project_id}取得Dollhouse以及PanoRetouch的IsFree/Price/ProcessDays/PanoCount四個值，當IsFree=false時，跟以前一樣呼叫[POST]api/Order新增Dollhouse以及訂單。若IsFree為true的話，執行第6步的步驟。
 6. 當IsFree=true時，有買Dollhouse呼叫[POST]api/DollTask/v3 新增Dollhose任務單，有買PanoRetouch則呼叫[POST]api/ImageTask/v3來新增影像處理訂單。
 7. 當RoleType=7(客製版)，個人資訊新增一項Billing Info，使用[GET] api/Invoice 取得客製版帳號已經開完的所有Invoice。
 8. 當您開啟專案/購買Dollhouse/購買影像處理訂單時，都會自動建立一筆InvoiceItem到資料庫中，這些InvoiceItem會在下個月一號，進行開立Invoice的動作，所以為了測試第七點，不可能等到下個月才看結果，所以這邊提供一個api可以把帳號目前尚未開立的InvoiceItem一起開立一張Invoice。此api請呼叫[GET] api/Stripe/create?userAcccount={your_account}，呼叫完會馬上開立Invoice，這時第7部的api才能取到資料。
