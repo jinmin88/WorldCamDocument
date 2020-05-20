@@ -449,7 +449,7 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 1. [GET] api/DollTask/{project_id} 增加兩個欄位IsEditable以及Hint兩個欄位
 2. Dollhouse以及PanoRetouch的價格顯示都依照回傳的Amount欄位顯示
 3. IsEditable意思代表此Dollhouse或PanoRetouching是否可以讓user取消選取
-4. Hint欄位如果不是null，則在Dollhouse和PanoRetouching下面顯示Hint字串
+4. 呼叫DollTask回傳的Hint欄位如果不是null，則在Dollhouse和PanoRetouching下面顯示Hint字串
 5. IsFree欄位代表要call哪個api, true的時候call [POST]api/DollTask/v3 , false時call [POST]api/Order
 6. 若想測試IsEditable=false的客製板狀態，請將客製版的設定Project price以及PanoRetouching的價格設定為0，dollhouse的設定設成1-30-60,2.5
 
