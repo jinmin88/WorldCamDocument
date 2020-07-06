@@ -453,6 +453,42 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 5. IsFree欄位代表要call哪個api, true的時候call [POST]api/DollTask/v3 , false時call [POST]api/Order
 6. 若想測試IsEditable=false的客製板狀態，請將客製版的設定Project price以及PanoRetouching的價格設定為0，dollhouse的設定設成1-30-60,2.5
 
+# asteroom 3.2 FloorPlan修改
+1. JProject資料結構新增bool HasImageProcessing以及List<JFloorPlanTask> FloorPlanTasks兩個資料結構代表目前FloorPlan的處理情況，Client端可使用這兩個資料顯示專案目前的FloorPlan處理狀態。
+2. 舊的 [GET] api/DollTask與[GET] api/ImageTask已經不使用。
+3. AddOn按鈕顯示邏輯，依照project.ShowAddon flag顯示
+4. 使用新的 [GET] api/Task?project_id={project_id}取得JTaskInfo的結果，Task回傳如下
+  ```json
+  {
+    "error_code": 0,
+    "message": "",
+    "data" : {
+      "dollTask" : {                //顯示Dollhouse price informaiton
+        "price" : 7.5,              //decimal價格，提供給勾選計算總額使用，若免費則此欄位回傳null
+        "price_desc" : "$ 10 USD",  //顯示在價格欄位的價格字串
+        "isEditable": true,         //是否此Item可勾選
+        "panoCount": 6,             //張數
+        "processDays": 1            //處理天數
+      },
+      "imageTask" : {  //顯示PanoRetouching price information
+        "price": 6,
+        "price_desc" : "$ 6 USD",
+        "isEditable" : true,
+        "panoCount": 6,
+        "processDays": 1  
+      },
+      "floorPlanTask": null,        //null代表目前還不需要顯示此Item
+      "IsShowP1FloorPlan" : true,   //當IsShowP1FloorPlan為true時，盡管floorplanTask為null，還是需要顯示phase 1的floorplan畫面
+      "data" : {
+        "IsShowMeasure" : true,     //FloorPlan是否需要顯示尺寸
+        "CameraHeight" : 60,        //腳架高度
+        "DisplayUnit" : 1           //腳架高度的單位 0:公分 1:英吋
+      }
+    }
+  }
+  ```
+
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
