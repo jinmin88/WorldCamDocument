@@ -487,7 +487,21 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     }
   }
   ```
-
+5. 紀錄用戶購買的品項(如Item.isEditable為false時，當作已選擇，若為true，則用戶點選後才加入要購買的清單)
+6. 將購買的品項呼叫[POST] api/Task?is_mobile={is_mobile}的方式，將以下資料送到server，server會回傳JResponse<string>的結構，如果response.data是null，顯示購買成功，若有回傳字串，則用redirect方式導向此網頁(訂單頁)
+  ``` json
+  {
+    "IsBuyDollhouse" : false,
+    "IsBuyPanoRetouching" : false,
+    "IsBuyFloorPlan" : true,
+    "ProjectId" : "08d81cc8-9cff-42fb-81a6-7bdf69e96852",
+    "Data" : {
+      "IsShowMeasure" : true,
+      "CameraHeight" : 123.44,
+      "DisplayUnit": 1  
+    }  
+  }
+  ```
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
