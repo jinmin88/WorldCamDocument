@@ -502,6 +502,21 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
     }  
   }
   ```
+  7. 新增FloorPlan Create的FCM通知
+    * FCM中的Data新增Type=7，意思是FloorplanTaskCreated通知，點擊之後帶出project_id所指定的project.
+    * IOS的Apns會送出LocKey=FCM_FloorplanTaskCreated, LocArgs={project_name, totalDays}，請照這個顯示對應字串
+    * 字串英文：The floor plan order of project {0} has been received. It will be ready within {1} working day(s).
+    * 字串繁中：收到「{0}」專案平面圖修圖訂單，預計{1}個工作天完成。
+    * 字串簡中：收到「{0}」項目全景照修图订单，预计{1}个工作天完成。
+  
+  8. 新增FloorPlan Close的通知
+    * FCM中的Data新增Type=8，意思是FloorplanTaskClosed通知，點擊之後帶出project_id所指定的project.
+    * IOS的Apns會送出LocKey=FCM_FloorplanTaskClosed, LocArgs={project_name}，請照這個顯示對應字串
+    * 字串英文：The floor plan of project {0} has been completed.
+    * 字串繁中：「{0}」專案平面圖已修圖完成。
+    * 字串簡中：「{0}」专案平面图已修图完成。
+  
+  
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
