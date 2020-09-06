@@ -516,6 +516,10 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 * 字串繁中：「{0}」專案平面圖已修圖完成。
 * 字串簡中：「{0}」专案平面图已修图完成。
 
+# asteroom 3.3 3D staging修改
+1. JProject資料結構新增List<JVirtualStagingTask> VirtualStagingTasks，Client端可以使用此資料描述3D staging task的處理狀況
+2. 
+
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
     ```csharp
