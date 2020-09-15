@@ -516,9 +516,29 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 * 字串繁中：「{0}」專案平面圖已修圖完成。
 * 字串簡中：「{0}」专案平面图已修图完成。
 
-# asteroom 3.3 3D staging修改
-1. JProject資料結構新增List<JVirtualStagingTask> VirtualStagingTasks，Client端可以使用此資料描述3D staging task的處理狀況
-2. 
+# asteroom 3.3
+1. 新增角色Basic
+* 當user.RoleType=3時即為Basic用戶
+* Basic用戶在取得專案列表時，專案回傳的資料結構新增一個欄位ExpiredTime，顯示專案甚麼時候會過期，若為null，則代表尚未開啟過。
+* 專案列表中，若JProject.ExpiredTime是null，則顯示CreatedTime，若不為null，則顯示ExpiredTime
+
+2. JUser新增occupation欄位，提供給前端使用 (透過`[PUT]api/User`更新內容)
+
+3. 3D Staging功能
+* JProject資料結構新增List<JVirtualStagingTask> VirtualStagingTasks，Client端可以使用此資料描述3D staging task的處理狀況。
+* Client端需根據`[GET]api/Project`回傳的JProject.ShowAddon來判斷Addon按鈕是否顯示。
+* 原有Addon按鈕按下之後，呼叫的`[GET]api/Task?project_id={project_id}` Api回傳的任務物件JTaskInfo新增一個欄位virtualStagingTask，提供3D staging相關資訊。
+* JTaskInfo.virtualStaging的price值，代表的是單價(因為此時還不知道用戶要買幾張)。
+* JTaskInfo.virtualStaging的priceDesc，為價格的顯示字串，可以直接秀在UI上。
+* JTaskInfo.virtualStaging的isEditable，代表此項目是否可勾選。
+* JTaskInfo.virtualStaging的panoCount，代表此task可以購買的場景數量
+* JTaskInfo.virtualStaging的processDays，會回傳null(需要依照data回傳的工作天數查詢表，顯示預計執行天數)
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPanos : List<JTaskPanoInfo>`(請到 (swagger)[https://test.asteroom.com/swagger] 查詢對應資料結構)，代表內容為提供用戶選擇的場景列表
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingStyles : List<JTaskStyleInfo>` 代表內容為提供用戶選擇風格列表
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingProcessDays : Dictionary<int, int>` 代表選n張時，所需的處理天數
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPrices : Dictionary<int, decimal>` 代表選n張時，所需的總價
+* 當用戶選擇完要買哪些場景，要選擇哪個風格之後，在原本的`JTaskPost`物件的data資料結構，設定要買的場景 `BuyVirtualStagingPanos : List<Guid>`，設定要買的風格 `BuyVirtualStagingStyle: int` 之後，呼叫 [POST] api/Task把要購買的東西給server，server一樣若需要轉到訂單網址，則data欄位有值，data是null時，直接顯示購買成功。
+  
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
