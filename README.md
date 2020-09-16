@@ -535,8 +535,8 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 * JTaskInfo.virtualStaging的processDays，會回傳null(需要依照data回傳的工作天數查詢表，顯示預計執行天數)
 * JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPanos : List<JTaskPanoInfo>`(請到 (swagger)[https://test.asteroom.com/swagger] 查詢對應資料結構)，代表內容為提供用戶選擇的場景列表
 * JTaskInfo.data中，回傳key,value結構為 `VirtualStagingStyles : List<JTaskStyleInfo>` 代表內容為提供用戶選擇風格列表
-* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingProcessDays : Dictionary<int, int>` 代表選n張時，所需的處理天數
-* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPrices : Dictionary<int, decimal>` 代表選n張時，所需的總價
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingProcessDays : Dictionary<string, int>` 代表選n張時，所需的處理天數
+* JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPrices : Dictionary<string, decimal>` 代表選n張時，所需的總價
 * 當用戶選擇完要買哪些場景，要選擇哪個風格之後，在原本的`JTaskPost`物件的data資料結構，設定要買的場景 `BuyVirtualStagingPanos : List<Guid>`，設定要買的風格 `BuyVirtualStagingStyle: int` 之後，呼叫 [POST] api/Task把要購買的東西給server，server一樣若需要轉到訂單網址，則data欄位有值，data是null時，直接顯示購買成功。
   
 
