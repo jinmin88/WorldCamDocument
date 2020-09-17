@@ -538,7 +538,20 @@ panoeditormobile.html這個網頁是手機編輯專用的網頁。
 * JTaskInfo.data中，回傳key,value結構為 `VirtualStagingProcessDays : Dictionary<string, int>` 代表選n張時，所需的處理天數
 * JTaskInfo.data中，回傳key,value結構為 `VirtualStagingPrices : Dictionary<string, decimal>` 代表選n張時，所需的總價
 * 當用戶選擇完要買哪些場景，要選擇哪個風格之後，在原本的`JTaskPost`物件的data資料結構，設定要買的場景 `BuyVirtualStagingPanos : List<Guid>`，設定要買的風格 `BuyVirtualStagingStyle: int` 之後，呼叫 [POST] api/Task把要購買的東西給server，server一樣若需要轉到訂單網址，則data欄位有值，data是null時，直接顯示購買成功。
+
+4. 新增3D staging Create的FCM通知
+* FCM中的Data新增Type=9，意思是VirtualStagingCreated通知，點擊之後帶出project_id所指定的project.
+* IOS的Apns會送出LocKey=FCM_VirtualStagingTaskCreated, LocArgs={project_name, totalDays}，請照這個顯示對應字串
+* 字串英文：The 3D staging order of tour {0} has been received. It will be ready within {1} working day(s).
+* 字串繁中：收到「{0}」專案3D居家設計訂單，預計{1}個工作天完成。
+* 字串簡中：收到「{0}」专案3D居家设计订单，预计{1}个工作天完成。
   
+5. 新增3D staging Close的FCM通知
+* FCM中的Data新增Type=10，意思是VirtualStagingClosed通知，點擊之後帶出project_id所指定的project.
+* IOS的Apns會送出LocKey=FCM_VirtualStagingTaskClosed, LocArgs={project_name}，請照這個顯示對應字串
+* 字串英文：The 3D staging of tour {0} has been completed.
+* 字串繁中：「{0}」專案3D居家設計已修圖完成。
+* 字串簡中：「{0}」专案3D居家设计已修图完成。
 
 # 列舉型態
 - ## <a name="AcctStatusEnum"></a>AcctStatusEnum (帳號啟用狀態)
